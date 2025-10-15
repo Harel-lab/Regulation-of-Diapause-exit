@@ -1,12 +1,10 @@
 #### Packages ####
 import pandas as pd
-import matplotlib.pyplot as plt 
-import seaborn as sns
 import numpy as np
+from scipy import stats
 from pyclustering.cluster.kmeans import kmeans
 from pyclustering.utils.metric import type_metric, distance_metric
 from pyclustering.cluster.center_initializer import kmeans_plusplus_initializer
-from scipy import stats
 
 ### Upload and modify data ####
 df_path = r"singe&double_sigmoid_fitted_data.csv"
@@ -40,4 +38,5 @@ for cluster in range(k):
     report = pd.DataFrame(clusterdf.columns)
     file_name = "cluster " + str(cluster+1) + "genes.csv"
     report.to_csv(file_name)
+
 
