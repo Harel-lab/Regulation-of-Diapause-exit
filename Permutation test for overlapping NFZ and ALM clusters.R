@@ -122,7 +122,6 @@ df$Number <- df_number$Number
 df$LabelFull <- ifelse(df$Label == "",
                        "",                     # No star → no label at all
                        paste0(df$Number))  # Show number + star
-
 df$LabelFull <- ifelse(df$Label == "" | df$Number < 15,
                        "",
                        paste0(df$Number))
@@ -130,11 +129,9 @@ df$Adj_p_value[df$Number < 15] <- NA
 
 # White-out cells with no stars
 df[df$LabelFull=="", "Value"] <- NA
-
 # Count genes per cluster
 ALM_cluster_counts <- table(ALM_genes2clusters$Cluster)
 NFZ_cluster_counts <- table(NFZ_genes2clusters$Cluster)
-
 # Named vectors of new cluster names with counts
 named_row_labels <- sapply(desired_row_order, function(cluster) {
   cluster_num <- as.numeric(gsub("[^0-9.]", "", cluster))
@@ -142,14 +139,12 @@ named_row_labels <- sapply(desired_row_order, function(cluster) {
   paste0(cluster, " (", count, ")")
 })
 names(named_row_labels) <- desired_row_order
-
 named_col_labels <- sapply(desired_col_order, function(cluster) {
   cluster_num <- as.numeric(gsub("[^0-9.]", "", cluster))
   count <- NFZ_cluster_counts[as.character(cluster_num)]
   paste0(cluster, " (", count, ")")
 })
 names(named_col_labels) <- desired_col_order
-
 # Update factor levels in df$Row and df$Column
 df$Row <- factor(df$Row, levels = desired_row_order, labels = named_row_labels)
 df$Column <- factor(df$Column, levels = desired_col_order, labels = named_col_labels)
@@ -175,4 +170,5 @@ g <- ggplot(df, aes(x = Column, y = Row, fill = Adj_p_value)) +
   theme_minimal() +
   ggtitle("Permutation test results (ALM shuffle)")
 ggsave("ALM vs NFZ compere.pdf", plot = g, width = 11, height = 8)
+
 
