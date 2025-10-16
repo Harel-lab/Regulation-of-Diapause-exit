@@ -82,4 +82,3 @@ print(paste("True:",sum(provided_drugs$IsEnriched),length(provided_drugs$Drug),r
 write.csv(provided_drugs, "provided_drugs_with_enrichment_flag.csv", row.names = FALSE)
 # Enrichment results
 write.csv(all_enrichments,paste0(Output_title,".csv"),row.names = F)
-
