@@ -38,5 +38,3 @@ for cluster in range(k):
     report = pd.DataFrame(clusterdf.columns)
     file_name = "cluster " + str(cluster+1) + "genes.csv"
     report.to_csv(file_name)
-
-
