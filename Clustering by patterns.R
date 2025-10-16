@@ -163,6 +163,3 @@ for (hot_status in c(1,0,-1)){
   }
 }
 dev.off()
-
-
-
