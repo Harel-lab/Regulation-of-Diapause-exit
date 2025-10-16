@@ -46,8 +46,7 @@ for (ALM_cluster_i in seq(1,ALM_n)) {
     # Count the number of mutual genes and store it in the matrix
     cluster_matrix[ALM_cluster_i, NFZ_cluster_i] <- length(mutual_genes)
     # get the retio between the mutual genes and all the genes: NFZ U ALM / NFZ n ALM
-    cluster_ratio_matrix[ALM_cluster_i, NFZ_cluster_i] <- length(mutual_genes)/length(all_genes)
-    
+    cluster_ratio_matrix[ALM_cluster_i, NFZ_cluster_i] <- length(mutual_genes)/length(all_genes)  
   }
 }
 cluster_ratio_matrix<-round(cluster_ratio_matrix,2)
@@ -97,7 +96,6 @@ stars <- ifelse(p_matrix < 0.01, "**",
 pval_labels <- p_matrix
 pval_labels[pval_labels >= 0.05] <- NA
 pval_labels[pval_labels == 0] <- 0.001
-
 pval_labels <- -log10(pval_labels)
 
 #### Re-order the data ####
@@ -116,7 +114,6 @@ df <- melt(ordered_cluster_ratio_matrix)
 df["Label"] <- as.vector(ordered_stars)
 df["Adj_p_value"] <- as.numeric(ordered_pvalue)
 colnames(df) <- c("Row", "Column", "Value","Label","Adj_p_value")
-
 df_number <- melt(ordered_cluster_matrix)
 colnames(df_number) <- c("Row", "Column", "Number")
 df$Number <- df_number$Number
@@ -127,7 +124,6 @@ df$LabelFull <- ifelse(df$Label == "" | df$Number < 15,
                        "",
                        paste0(df$Number))
 df$Adj_p_value[df$Number < 15] <- NA
-
 # White-out cells with no stars
 df[df$LabelFull=="", "Value"] <- NA
 # Count genes per cluster
@@ -171,6 +167,7 @@ g <- ggplot(df, aes(x = Column, y = Row, fill = Adj_p_value)) +
   theme_minimal() +
   ggtitle("Permutation test results (ALM shuffle)")
 ggsave("ALM vs NFZ compere.pdf", plot = g, width = 11, height = 8)
+
 
 
 
