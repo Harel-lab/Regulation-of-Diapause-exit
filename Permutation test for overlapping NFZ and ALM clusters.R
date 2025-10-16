@@ -167,7 +167,3 @@ g <- ggplot(df, aes(x = Column, y = Row, fill = Adj_p_value)) +
   theme_minimal() +
   ggtitle("Permutation test results (ALM shuffle)")
 ggsave("ALM vs NFZ compere.pdf", plot = g, width = 11, height = 8)
-
-
-
-
