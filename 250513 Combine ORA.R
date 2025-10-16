@@ -1,9 +1,11 @@
+#### Packages ####
 library(clusterProfiler)
 library(ggplot2)
 library(msigdbr)
 library(readxl)
 library(dplyr)
 
+#### Input paths ####
 # Get ontology
 subC <- c('CP:KEGG', 'CP:BIOCARTA', 'CP:REACTOME', 'GO:BP', 'GO:MF')
 #subC <- c('CP:KEGG','CP:REACTOME')
@@ -42,3 +44,4 @@ p <- dotplot(msigdb_enrich, showCategory = 10) +
   labs(title= "GO",x = "Gene Ratio\n[Genes in the data/Genes in onthology]") +
   theme(plot.title = element_text(hjust = 0.5))
 }
+
